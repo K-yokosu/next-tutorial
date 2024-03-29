@@ -180,9 +180,28 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
+const todos = [
+  {
+    title: "seed1",
+    content: "seed1 content",
+    date: '2024-03-29',
+  },
+  {
+    title: "seed2",
+    content: "seed2 content",
+    date: '2024-03-28',
+  },
+  {
+    title: "seed3",
+    content: "seed3 content",
+    date: '2024-03-27',
+  },
+];
+
 module.exports = {
   users,
   customers,
   invoices,
   revenue,
+  todos,
 };

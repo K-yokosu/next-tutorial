@@ -4,8 +4,48 @@ const {
   customers,
   revenue,
   users,
+  todos,
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
+
+
+async function seedTodos(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+    // Create the "todos" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS todos (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        content TEXT NOT NULL,
+        date DATE NOT NULL
+      );
+    `;
+
+    console.log(`Created "todos" table`);
+
+    // Insert data into the "todos" table
+    const insertedTodos = await Promise.all(
+      todos.map(
+        (todo) => client.sql`
+        INSERT INTO todos (title, content, date)
+        VALUES (${todo.title}, ${todo.content}, ${todo.date})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+      ),
+    );
+
+    console.log(`Seeded ${insertedTodos.length} todos`);
+
+    return {
+      createTable,
+      todos: insertedTodos,
+    };
+  } catch (error) {
+    console.error('Error seeding todos:', error);
+    throw error;
+  }
+}
 
 async function seedUsers(client) {
   try {
@@ -167,6 +207,7 @@ async function main() {
   await seedCustomers(client);
   await seedInvoices(client);
   await seedRevenue(client);
+  await seedTodos(client);
 
   await client.end();
 }

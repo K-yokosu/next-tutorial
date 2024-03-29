@@ -165,6 +165,25 @@ const invoices = [
   },
 ];
 
+const todos = [
+  {
+    title: "seed1",
+    content: "seed1 content",
+    date: '2024-03-29',
+  },
+  {
+    title: "seed2",
+    content: "seed2 content",
+    date: '2024-03-28',
+  },
+  {
+    title: "seed3",
+    content: "seed3 content",
+    date: '2024-03-27',
+  },
+];
+
+
 const revenue = [
   { month: 'Jan', revenue: 2000 },
   { month: 'Feb', revenue: 1800 },
@@ -185,4 +204,5 @@ module.exports = {
   customers,
   invoices,
   revenue,
+  todos,
 };

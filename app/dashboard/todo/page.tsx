@@ -13,6 +13,8 @@
 // import { fetchTodo } from '@/app/lib/data';
 import TodosTable from '@/app/ui/todos/table';
 import { CreateTodo } from '@/app/ui/todos/buttons';
+import { Suspense } from 'react';
+import { TodoTableSkeleton } from '@/app/ui/skeletons';
 
 const TodoPage = async () => {
     // const todos = await fetchTodo();
@@ -21,7 +23,11 @@ const TodoPage = async () => {
         <>
             <div>todo</div>
             <CreateTodo />
-            <TodosTable />
+            <Suspense 
+            // key={query + currentPage} 
+            fallback={<TodoTableSkeleton />}>
+                <TodosTable />
+            </Suspense>
         </>
     )
 }

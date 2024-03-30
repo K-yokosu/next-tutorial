@@ -86,3 +86,10 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export type TodoType = {
+  id: string;
+  title: string;
+  content: string;
+  date: string;
+}

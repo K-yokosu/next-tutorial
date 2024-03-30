@@ -1,5 +1,5 @@
 // import Image from 'next/image';
-// import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
+import { UpdateTodo, DeleteTodo } from '@/app/ui/todos/buttons';
 // import InvoiceStatus from '@/app/ui/invoices/status';
 // import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 // import { fetchFilteredInvoices } from '@/app/lib/data';
@@ -46,7 +46,12 @@ export default async function TodosTable() {
                   <td className="whitespace-nowrap px-3 py-3">
                     {todo.content}
                   </td>
-                  <td>edit</td>
+                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex justify-end gap-3">
+                      <UpdateTodo id={todo.id} />
+                      <DeleteTodo id={todo.id} />
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

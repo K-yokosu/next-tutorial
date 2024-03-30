@@ -93,3 +93,9 @@ export type TodoType = {
   content: string;
   date: string;
 }
+
+export type TodoForm = {
+  id: string;
+  title: string;
+  content: string;
+};

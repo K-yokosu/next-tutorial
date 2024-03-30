@@ -9,6 +9,7 @@ import {
   User,
   Revenue,
   TodoType,
+  TodoForm
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -33,6 +34,27 @@ export async function fetchTodo() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch todo data.');
+  }
+}
+
+export async function fetchTodoById(id: string) {
+  noStore();
+  try {
+    console.log('fetchTodoById');
+    const data = await sql<TodoForm>`
+      SELECT
+        todos.id,
+        todos.title,
+        todos.content
+      FROM todos
+      WHERE todos.id = ${id};
+    `;
+
+    console.log(data); // Invoice is an empty array []
+    return data.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch todo.');
   }
 }
 

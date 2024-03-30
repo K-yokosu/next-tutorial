@@ -14,10 +14,10 @@ export function CreateTodo() {
   );
 }
 
-export function UpdateTodoe({ id }: { id: string }) {
+export function UpdateTodo({ id }: { id: string }) {
   return (
     <Link
-      href={`/dashboard/todo/${id}/edit`}
+      href={`/dashboard/todo/${id}/`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
@@ -25,11 +25,11 @@ export function UpdateTodoe({ id }: { id: string }) {
   );
 }
 
-export function DeleteTodoe({ id }: { id: string }) {
-  const deleteTodoeWithId = deleteTodo.bind(null, id);
+export function DeleteTodo({ id }: { id: string }) {
+  const deleteTodoWithId = deleteTodo.bind(null, id);
  
   return (
-    <form action={deleteTodoeWithId}>
+    <form action={deleteTodoWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-4" />

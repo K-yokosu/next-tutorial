@@ -26,6 +26,8 @@ const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 // omitは対象のプロパティの入力を省略できる
 const CreateTodo = TodoFormSchema.omit({ id: true, date: true });
 
+const UpdateTodo = TodoFormSchema.omit({ id: true, date: true });
+
 export async function createInvoice(formData: FormData) {
     const { customerId, amount, status } = CreateInvoice.parse({
       customerId: formData.get('customerId'),
@@ -103,6 +105,27 @@ export async function createInvoice(formData: FormData) {
       return {
         message: 'Database Error: Failed to Create Todo.',
       };
+    }
+   
+    revalidatePath('/dashboard/todo');
+    redirect('/dashboard/todo');
+  }
+
+  export async function updateTodo(id: string, formData: FormData) {
+    console.log(formData);
+    const { title, content } = UpdateTodo.parse({
+      title: formData.get('title'),
+      content: formData.get('content'),
+    });
+   
+    try {
+      await sql`
+          UPDATE todos
+          SET title = ${title}, content = ${content}
+          WHERE id = ${id}
+        `;
+    } catch (error) {
+      return { message: 'Database Error: Failed to Update Todo.' };
     }
    
     revalidatePath('/dashboard/todo');
